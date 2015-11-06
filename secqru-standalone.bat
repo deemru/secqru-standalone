@@ -52,8 +52,8 @@ if not exist support mkdir support
 
 if not exist nginx/%prolog%-nginx.exe (
     if not exist temp mkdir temp
-    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat
-    if not exist temp\%nginx_ver%.zip %dlfl% %nginx_src% temp\%nginx_ver%.zip
+    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat || exit /b
+    if not exist temp\%nginx_ver%.zip %dlfl% %nginx_src% temp\%nginx_ver%.zip || exit /b
     mkdir temp\nginx
     call temp\zipjs.bat unzip -source %CD%\temp\%nginx_ver%.zip -destination %CD%\temp\nginx
     move temp\nginx\%nginx_ver% nginx
@@ -63,8 +63,8 @@ if not exist nginx/%prolog%-nginx.exe (
 
 if not exist php/%prolog%-php-cgi.exe (
     if not exist temp mkdir temp
-    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat
-    if not exist temp\%php_ver%.zip %dlfl% %php_src% temp\%php_ver%.zip
+    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat || exit /b
+    if not exist temp\%php_ver%.zip %dlfl% %php_src% temp\%php_ver%.zip || exit /b
     mkdir temp\php
     call temp\zipjs.bat unzip -source %CD%\temp\%php_ver%.zip -destination %CD%\temp\php
     move temp\php php
@@ -73,7 +73,7 @@ if not exist php/%prolog%-php-cgi.exe (
     (echo extension=ext\php_mbstring.dll) >> php\php.ini
 
     if not exist %vc_local% (
-        if not exist temp\vcredist_x86.exe %dlfl% %vc_src% temp\vcredist_x86.exe
+        if not exist temp\vcredist_x86.exe %dlfl% %vc_src% temp\vcredist_x86.exe || exit /b
         temp\vcredist_x86.exe /q
     ) else (
         %vc_local% /q
@@ -82,22 +82,23 @@ if not exist php/%prolog%-php-cgi.exe (
 
 if not exist nginx/html/secqru (
     if not exist temp mkdir temp
-    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat
-    if not exist temp\secqru.zip %dlfl% https://github.com/deemru/secqru/archive/master.zip temp\secqru.zip
+    if not exist temp\zipjs.bat %dlfl% %zip_src% temp\zipjs.bat || exit /b
+    if not exist temp\secqru.zip %dlfl% https://github.com/deemru/secqru/archive/master.zip temp\secqru.zip || exit /b
     mkdir temp\secqru
     call temp\zipjs.bat unzip -source %CD%\temp\secqru.zip -destination %CD%\temp\secqru
     move temp\secqru\secqru-master nginx/html/secqru
     rmdir temp\secqru
     copy nginx\html\secqru\secqru.config.sample.php nginx\html\secqru\secqru.config.php
+    ( echo ^<?php phpinfo^(^)^; ?^>) > nginx\html\index.php
 )
 
-if not exist support\%prolog%-php-cgi-spawner.exe %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.0.1/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe
+if not exist support\%prolog%-php-cgi-spawner.exe %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.0.1/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe || exit /b
 
 if exist temp if exist nginx if exist php if exist nginx/html/secqru if exist php/%prolog%-php-cgi.exe if exist nginx/%prolog%-nginx.exe if exist support\%prolog%-php-cgi-spawner.exe (
     rmdir temp /s /q
 )
 
-if not exist %ngxcfg_local% %dlfl% %ngxcfg_src% %ngxcfg_local%
+if not exist %ngxcfg_local% %dlfl% %ngxcfg_src% %ngxcfg_local% || exit /b
 call %ngxcfg_local% %nginx_port% %php_port% nginx\conf\nginx.conf
 
 ( echo call %prolog%-stop.bat) > %prolog%-start.bat
@@ -109,3 +110,6 @@ call %ngxcfg_local% %nginx_port% %php_port% nginx\conf\nginx.conf
 ( echo taskkill /F /IM %prolog%-php-cgi-spawner.exe) > %prolog%-stop.bat
 ( echo taskkill /F /IM %prolog%-php-cgi.exe) >> %prolog%-stop.bat
 ( echo taskkill /F /IM %prolog%-nginx.exe) >> %prolog%-stop.bat
+
+call %prolog%-start.bat
+start http://127.0.0.1:%nginx_port%/secqru
