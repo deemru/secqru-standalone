@@ -11,11 +11,7 @@ set output=%3
 (echo         access_log off;) >> %output%
 (echo         index index.php;) >> %output%
 (echo.) >> %output%
-(echo         location /secqru/ {) >> %output%
-(echo             try_files $uri $uri/ =404;) >> %output%
-(echo         }) >> %output%
-(echo.) >> %output%
-(echo         location /secqru/tiklan {) >> %output%
+(echo         location /secqru {) >> %output%
 (echo             try_files $uri $uri/ /secqru/index.php;) >> %output%
 (echo         }) >> %output%
 (echo.) >> %output%
