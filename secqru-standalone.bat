@@ -8,6 +8,7 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.8.0
+set php70_ver=php-7.0.0
 set php56_ver=php-5.6.15
 set php54_ver=php-5.4.45
 
@@ -20,10 +21,13 @@ if not exist %dlfl% (
 )
 
 set nginx_src=http://nginx.org/download/%nginx_ver%.zip
+set php70_src=http://windows.php.net/downloads/releases/%php70_ver%-nts-Win32-VC14-x86.zip
 set php56_src=http://windows.php.net/downloads/releases/%php56_ver%-nts-Win32-VC11-x86.zip
 set php54_src=http://windows.php.net/downloads/releases/%php54_ver%-nts-Win32-VC9-x86.zip
 set zip_src=https://github.com/npocmaka/batch.scripts/raw/master/hybrids/jscript/zipjs.bat
 
+set vc14_local=third_party\VC14_redist\vcredist_x86.exe
+set vc14_src=https://github.com/deemru/secqru-standalone/raw/master/third_party/VC14_redist/vcredist_x86.exe
 set vc11_local=third_party\VC11_redist\vcredist_x86.exe
 set vc11_src=https://github.com/deemru/secqru-standalone/raw/master/third_party/VC11_redist/vcredist_x86.exe
 set vc9_local=third_party\VC9_redist\vcredist_x86.exe
@@ -40,6 +44,24 @@ if not "%1"=="" if "%1"=="php54" (
     set php_src=%php54_src%
     set vc_local=%vc9_local%
     set vc_src=%vc9_src%
+    set vc_check=
+)
+
+if not "%1"=="" if "%1"=="php56" (
+    set is_php_default=0
+    set php_ver=%php56_ver%
+    set php_src=%php56_src%
+    set vc_local=%vc11_local%
+    set vc_src=%vc11_src%
+    set vc_check=
+)
+
+if not "%1"=="" if "%1"=="php70" (
+    set is_php_default=0
+    set php_ver=%php70_ver%
+    set php_src=%php70_src%
+    set vc_local=%vc14_local%
+    set vc_src=%vc14_src%
     set vc_check=
 )
 
