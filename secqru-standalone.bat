@@ -9,7 +9,7 @@ set prolog=secqru
 
 set nginx_ver=nginx-1.8.0
 set php70_ver=php-7.0.0
-set php56_ver=php-5.6.15
+set php56_ver=php-5.6.16
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
