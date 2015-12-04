@@ -53,7 +53,7 @@ if not "%1"=="" if "%1"=="php56" (
     set php_src=%php56_src%
     set vc_local=%vc11_local%
     set vc_src=%vc11_src%
-    set vc_check=
+    set vc_check=msvcr110.dll
 )
 
 if not "%1"=="" if "%1"=="php70" (
@@ -62,7 +62,7 @@ if not "%1"=="" if "%1"=="php70" (
     set php_src=%php70_src%
     set vc_local=%vc14_local%
     set vc_src=%vc14_src%
-    set vc_check=
+    set vc_check=vcruntime140.dll
 )
 
 if %is_php_default%==1 (
