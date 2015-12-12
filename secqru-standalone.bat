@@ -106,6 +106,7 @@ if not exist php/%prolog%-php-cgi.exe (
     copy php\php-cgi.exe php\%prolog%-php-cgi.exe || goto :error
     (echo [PHP]) > php\php.ini
     (echo extension=ext\php_mbstring.dll) >> php\php.ini
+    (echo extension=ext\php_gd2.dll) >> php\php.ini
 
     if not "%vc_check%"=="" if exist %windir%\SysWOW64 (
         if not exist %windir%\SysWOW64\%vc_check% call :redist
