@@ -1,4 +1,5 @@
 # secqru-standalone
+[![Build status](https://ci.appveyor.com/api/projects/status/31sly523q4ojxesu?svg=true)](https://ci.appveyor.com/project/deemru/secqru-standalone)
 
 [secqru-standalone](https://github.com/deemru/secqru-standalone) creates a portable version of [secqru](https://github.com/deemru/secqru) by deploying a simple stack of nginx + PHP on Windows
 
