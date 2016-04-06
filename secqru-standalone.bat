@@ -161,15 +161,18 @@ if not exist %prolog%-stop.bat (
     ( echo taskkill /F /IM %prolog%-nginx.exe) >> %prolog%-stop.bat
 )
 
-call %prolog%-start.bat
-set echostep=SUCCESS: http://127.0.0.1:%nginx_port%/secqru
+set echostep=SUCCESS: run %prolog%-start.bat (http://127.0.0.1:%nginx_port%/secqru)
 call :echostep
-pause
+if not "%nopause%"=="1" (
+    pause
+)
 goto :eof
 
 :error
 echo %error%
-pause
+if not "%nopause%"=="1" (
+    pause
+)
 exit /b
 
 :redist
