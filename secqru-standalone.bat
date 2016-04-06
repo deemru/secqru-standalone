@@ -105,8 +105,12 @@ if not exist php/%prolog%-php-cgi.exe (
     move temp\php php || goto :error
     copy php\php-cgi.exe php\%prolog%-php-cgi.exe || goto :error
     (echo [PHP]) > php\php.ini
-    (echo extension=ext\php_mbstring.dll) >> php\php.ini
-    (echo extension=ext\php_gd2.dll) >> php\php.ini
+    (echo memory_limit = 512M) >> php\%prolog%-php.ini
+    (echo post_max_size = 32M) >> php\%prolog%-php.ini
+    (echo upload_max_filesize = 32M) >> php\%prolog%-php.ini
+    (echo extension = ext\php_mbstring.dll) >> php\%prolog%-php.ini
+    (echo extension = ext\php_gd2.dll) >> php\%prolog%-php.ini
+    (echo extension = ext\php_curl.dll) >> php\%prolog%-php.ini
 
     if not "%vc_check%"=="" if exist %windir%\SysWOW64 (
         if not exist %windir%\SysWOW64\%vc_check% call :redist
@@ -140,16 +144,12 @@ if not exist support\%prolog%-php-cgi-spawner.exe (
     set echostep=Installing php-cgi-spawner
     call :echostep
     if not exist support mkdir support || goto :error
-    %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.0.1/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe || goto :error
-)
-
-if exist temp if exist nginx if exist php if exist nginx/html/secqru if exist php/%prolog%-php-cgi.exe if exist nginx/%prolog%-nginx.exe if exist support\%prolog%-php-cgi-spawner.exe (
-    rmdir temp /s /q
+    %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.0.20/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe || goto :error
 )
 
 if not exist %prolog%-start.bat (
     ( echo tasklist /fi "imagename eq %prolog%-*" 2^>nul ^| find /i /n "%prolog%-"^>nul ^&^& call %prolog%-stop.bat) > %prolog%-start.bat
-    ( echo start support\%prolog%-php-cgi-spawner php\%prolog%-php-cgi %php_port% %php_threads%) >> %prolog%-start.bat
+    ( echo start support\%prolog%-php-cgi-spawner "php\%prolog%-php-cgi -c php\%prolog%-php.ini" %php_port% %php_threads%) >> %prolog%-start.bat
     ( echo cd nginx) >> %prolog%-start.bat
     ( echo start %prolog%-nginx.exe) >> %prolog%-start.bat
     ( echo cd ..) >> %prolog%-start.bat
@@ -161,10 +161,32 @@ if not exist %prolog%-stop.bat (
     ( echo taskkill /F /IM %prolog%-nginx.exe) >> %prolog%-stop.bat
 )
 
-set echostep=SUCCESS: run %prolog%-start.bat (http://127.0.0.1:%nginx_port%/secqru)
+set echostep=SUCCESS: run "%prolog%-start.bat", open "http://127.0.0.1:%nginx_port%/secqru"
 call :echostep
 if not "%nopause%"=="1" (
     pause
+) else if "%makezip%"=="1" (
+    set echostep=Making %prolog%-standalone.zip
+    call :echostep
+    if exist %prolog%-standalone.zip del %prolog%-standalone.zip
+    if exist %prolog%-standalone rmdir %prolog%-standalone /s /q
+    mkdir %prolog%-standalone || goto :error
+    mkdir %prolog%-standalone\support || goto :error
+    xcopy nginx %prolog%-standalone\nginx\ /s/e/h || goto :error
+    xcopy php %prolog%-standalone\php\ /s/e/h || goto :error
+    copy support\%prolog%-php-cgi-spawner.exe %prolog%-standalone\support\%prolog%-php-cgi-spawner.exe || goto :error
+    copy %prolog%-start.bat %prolog%-standalone\%prolog%-start.bat || goto :error
+    copy %prolog%-stop.bat %prolog%-standalone\%prolog%-stop.bat || goto :error
+    call temp\zipjs.bat zipDirItems -source %prolog%-standalone -destination %prolog%-standalone.zip
+    rmdir %prolog%-standalone /s /q
+    if not exist %prolog%-standalone.zip (
+        set error=ERROR: zipjs.bat failed
+        goto :error
+    )
+)
+
+if exist temp if exist nginx if exist php if exist nginx/html/secqru if exist php/%prolog%-php-cgi.exe if exist nginx/%prolog%-nginx.exe if exist support\%prolog%-php-cgi-spawner.exe (
+    rmdir temp /s /q
 )
 goto :eof
 
