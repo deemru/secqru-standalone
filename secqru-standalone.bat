@@ -184,10 +184,6 @@ if not "%nopause%"=="1" (
         goto :error
     )
 )
-
-if exist temp if exist nginx if exist php if exist nginx/html/secqru if exist php/%prolog%-php-cgi.exe if exist nginx/%prolog%-nginx.exe if exist support\%prolog%-php-cgi-spawner.exe (
-    rmdir temp /s /q
-)
 goto :eof
 
 :error
