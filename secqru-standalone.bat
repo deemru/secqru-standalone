@@ -8,8 +8,8 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.8.1
-set php70_ver=php-7.0.5
-set php56_ver=php-5.6.20
+set php70_ver=php-7.0.6
+set php56_ver=php-5.6.21
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
@@ -111,6 +111,7 @@ if not exist php/%prolog%-php-cgi.exe (
     (echo extension = ext\php_mbstring.dll) >> php\%prolog%-php.ini
     (echo extension = ext\php_gd2.dll) >> php\%prolog%-php.ini
     (echo extension = ext\php_curl.dll) >> php\%prolog%-php.ini
+    (echo user_ini.filename = "") >> php\%prolog%-php.ini
 
     if not "%vc_check%"=="" if exist %windir%\SysWOW64 (
         if not exist %windir%\SysWOW64\%vc_check% call :redist
