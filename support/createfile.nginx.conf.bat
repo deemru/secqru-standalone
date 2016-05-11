@@ -34,7 +34,7 @@ set output=%3
 (echo             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;) >> %output%
 (echo             fastcgi_buffering off;) >> %output%
 (echo             fastcgi_read_timeout 90;) >> %output%
-(echo             include fastcgi_params;) >> %output%
+(echo             include nginx\conf\fastcgi_params;) >> %output%
 (echo         }) >> %output%
 (echo     }) >> %output%
 (echo }) >> %output%

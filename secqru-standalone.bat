@@ -104,14 +104,13 @@ if not exist php/%prolog%-php-cgi.exe (
     )
     move temp\php php || goto :error
     copy php\php-cgi.exe php\%prolog%-php-cgi.exe || goto :error
-    (echo [PHP]) > php\php.ini
-    (echo memory_limit = 512M) >> php\%prolog%-php.ini
-    (echo post_max_size = 32M) >> php\%prolog%-php.ini
-    (echo upload_max_filesize = 32M) >> php\%prolog%-php.ini
-    (echo extension = ext\php_mbstring.dll) >> php\%prolog%-php.ini
-    (echo extension = ext\php_gd2.dll) >> php\%prolog%-php.ini
-    (echo extension = ext\php_curl.dll) >> php\%prolog%-php.ini
-    (echo user_ini.filename = "") >> php\%prolog%-php.ini
+    (echo memory_limit = 512M) >> %prolog%-php.conf
+    (echo post_max_size = 32M) >> %prolog%-php.conf
+    (echo upload_max_filesize = 32M) >> %prolog%-php.conf
+    (echo extension = ext\php_mbstring.dll) >> %prolog%-php.conf
+    (echo extension = ext\php_gd2.dll) >> %prolog%-php.conf
+    (echo extension = ext\php_curl.dll) >> %prolog%-php.conf
+    (echo user_ini.filename = "") >> %prolog%-php.conf
 
     if not "%vc_check%"=="" if exist %windir%\SysWOW64 (
         if not exist %windir%\SysWOW64\%vc_check% call :redist
@@ -138,7 +137,7 @@ if not exist nginx/html/secqru (
     ( echo ^<?php phpinfo^(^)^; ?^>) > nginx\html\index.php
 
     if not exist %ngxcfg_local% %dlfl% %ngxcfg_src% %ngxcfg_local% || goto :error
-    call %ngxcfg_local% %nginx_port% %php_port% nginx\conf\nginx.conf
+    call %ngxcfg_local% %nginx_port% %php_port% %prolog%-nginx.conf
 )
 
 if not exist support\%prolog%-php-cgi-spawner.exe (
@@ -150,9 +149,9 @@ if not exist support\%prolog%-php-cgi-spawner.exe (
 
 if not exist %prolog%-start.bat (
     ( echo tasklist /fi "imagename eq %prolog%-*" 2^>nul ^| find /i /n "%prolog%-"^>nul ^&^& call %prolog%-stop.bat) > %prolog%-start.bat
-    ( echo start support\%prolog%-php-cgi-spawner "php\%prolog%-php-cgi -c php\%prolog%-php.ini" %php_port% %php_threads%) >> %prolog%-start.bat
+    ( echo start support\%prolog%-php-cgi-spawner "php\%prolog%-php-cgi -c %prolog%-php.conf" %php_port% %php_threads%) >> %prolog%-start.bat
     ( echo cd nginx) >> %prolog%-start.bat
-    ( echo start %prolog%-nginx.exe) >> %prolog%-start.bat
+    ( echo start %prolog%-nginx.exe -c ..\%prolog%-nginx.conf) >> %prolog%-start.bat
     ( echo cd ..) >> %prolog%-start.bat
 )
 
