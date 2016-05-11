@@ -3,16 +3,27 @@ clone_folder: c:\github\deemru\secqru-standalone\
 build_script:
 - cmd: >-
     echo %time%
+
     set NOPAUSE=1
+
     set MAKEZIP=1
+
     secqru-standalone.bat php54
+
     copy secqru-standalone.zip secqru-standalone-php54.zip
+
     rmdir php /s /q
+
     secqru-standalone.bat php56
+
     copy secqru-standalone.zip secqru-standalone-php56.zip
+
     rmdir php /s /q
+
     secqru-standalone.bat php70
+
     copy secqru-standalone.zip secqru-standalone-php70.zip
+
     echo %time%
 artifacts:
 - path: secqru-standalone-php54.zip
