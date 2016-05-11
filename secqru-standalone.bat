@@ -175,6 +175,8 @@ if not "%nopause%"=="1" (
     xcopy nginx %prolog%-standalone\nginx\ /s/e/h || goto :error
     xcopy php %prolog%-standalone\php\ /s/e/h || goto :error
     copy support\%prolog%-php-cgi-spawner.exe %prolog%-standalone\support\%prolog%-php-cgi-spawner.exe || goto :error
+    copy %prolog%-nginx.conf %prolog%-standalone\%prolog%-nginx.conf || goto :error
+    copy %prolog%-php.conf %prolog%-standalone\%prolog%-php.conf || goto :error
     copy %prolog%-start.bat %prolog%-standalone\%prolog%-start.bat || goto :error
     copy %prolog%-stop.bat %prolog%-standalone\%prolog%-stop.bat || goto :error
     call temp\zipjs.bat zipDirItems -source %prolog%-standalone -destination %prolog%-standalone.zip
