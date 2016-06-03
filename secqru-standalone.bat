@@ -104,7 +104,7 @@ if not exist php/%prolog%-php-cgi.exe (
     )
     move temp\php php || goto :error
     copy php\php-cgi.exe php\%prolog%-php-cgi.exe || goto :error
-    (echo memory_limit = 512M) >> %prolog%-php.conf
+    (echo memory_limit = 512M) > %prolog%-php.conf
     (echo post_max_size = 32M) >> %prolog%-php.conf
     (echo upload_max_filesize = 32M) >> %prolog%-php.conf
     (echo extension = ext\php_mbstring.dll) >> %prolog%-php.conf
