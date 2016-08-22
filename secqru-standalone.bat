@@ -7,7 +7,7 @@ set php_threads=4
 
 set prolog=secqru
 
-set nginx_ver=nginx-1.10.0
+set nginx_ver=nginx-1.10.1
 set php70_ver=php-7.0.10
 set php56_ver=php-5.6.25
 set php54_ver=php-5.4.45
