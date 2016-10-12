@@ -107,9 +107,11 @@ if not exist php/%prolog%-php-cgi.exe (
     (echo memory_limit = 512M) > %prolog%-php.conf
     (echo post_max_size = 32M) >> %prolog%-php.conf
     (echo upload_max_filesize = 32M) >> %prolog%-php.conf
+    (echo extension_dir = .) >> %prolog%-php.conf
     (echo extension = ext\php_mbstring.dll) >> %prolog%-php.conf
     (echo extension = ext\php_gd2.dll) >> %prolog%-php.conf
     (echo extension = ext\php_curl.dll) >> %prolog%-php.conf
+    (echo zend_extension = ext\php_opcache.dll) >> %prolog%-php.conf
     (echo user_ini.filename = "") >> %prolog%-php.conf
 
     if not "%vc_check%"=="" if exist %windir%\SysWOW64 (
@@ -148,6 +150,7 @@ if not exist support\%prolog%-php-cgi-spawner.exe (
 )
 
 if not exist %prolog%-start.bat (
+    ( echo set PHP_FCGI_MAX_REQUESTS=0) >> %prolog%-start.bat
     ( echo tasklist /fi "imagename eq %prolog%-*" 2^>nul ^| find /i /n "%prolog%-"^>nul ^&^& call %prolog%-stop.bat) > %prolog%-start.bat
     ( echo start support\%prolog%-php-cgi-spawner "php\%prolog%-php-cgi -c %prolog%-php.conf" %php_port% %php_threads%) >> %prolog%-start.bat
     ( echo cd nginx) >> %prolog%-start.bat
