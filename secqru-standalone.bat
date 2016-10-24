@@ -150,8 +150,8 @@ if not exist support\%prolog%-php-cgi-spawner.exe (
 )
 
 if not exist %prolog%-start.bat (
-    ( echo set PHP_FCGI_MAX_REQUESTS=0) >> %prolog%-start.bat
-    ( echo tasklist /fi "imagename eq %prolog%-*" 2^>nul ^| find /i /n "%prolog%-"^>nul ^&^& call %prolog%-stop.bat) > %prolog%-start.bat
+    ( echo set PHP_FCGI_MAX_REQUESTS=0) > %prolog%-start.bat
+    ( echo tasklist /fi "imagename eq %prolog%-*" 2^>nul ^| find /i /n "%prolog%-"^>nul ^&^& call %prolog%-stop.bat) >> %prolog%-start.bat
     ( echo start support\%prolog%-php-cgi-spawner "php\%prolog%-php-cgi -c %prolog%-php.conf" %php_port% %php_threads%) >> %prolog%-start.bat
     ( echo cd nginx) >> %prolog%-start.bat
     ( echo start %prolog%-nginx.exe -c ..\%prolog%-nginx.conf) >> %prolog%-start.bat
