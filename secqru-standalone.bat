@@ -8,8 +8,9 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.10.2
-set php70_ver=php-7.0.13
-set php56_ver=php-5.6.28
+set php71_ver=php-7.1.0
+set php70_ver=php-7.0.14
+set php56_ver=php-5.6.29
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
@@ -21,6 +22,7 @@ if not exist %dlfl% (
 )
 
 set nginx_src=http://nginx.org/download/%nginx_ver%.zip
+set php71_src=http://windows.php.net/downloads/releases/%php71_ver%-nts-Win32-VC14-x86.zip
 set php70_src=http://windows.php.net/downloads/releases/%php70_ver%-nts-Win32-VC14-x86.zip
 set php56_src=http://windows.php.net/downloads/releases/%php56_ver%-nts-Win32-VC11-x86.zip
 set php54_src=http://windows.php.net/downloads/releases/%php54_ver%-nts-Win32-VC9-x86.zip
@@ -60,6 +62,15 @@ if not "%1"=="" if "%1"=="php70" (
     set is_php_default=0
     set php_ver=%php70_ver%
     set php_src=%php70_src%
+    set vc_local=%vc14_local%
+    set vc_src=%vc14_src%
+    set vc_check=vcruntime140.dll
+)
+
+if not "%1"=="" if "%1"=="php71" (
+    set is_php_default=0
+    set php_ver=%php71_ver%
+    set php_src=%php71_src%
     set vc_local=%vc14_local%
     set vc_src=%vc14_src%
     set vc_check=vcruntime140.dll
