@@ -25,7 +25,7 @@ set nginx_src=http://nginx.org/download/%nginx_ver%.zip
 set php71_src=http://windows.php.net/downloads/releases/%php71_ver%-nts-Win32-VC14-x86.zip
 set php70_src=http://windows.php.net/downloads/releases/%php70_ver%-nts-Win32-VC14-x86.zip
 set php56_src=http://windows.php.net/downloads/releases/%php56_ver%-nts-Win32-VC11-x86.zip
-set php54_src=http://windows.php.net/downloads/releases/%php54_ver%-nts-Win32-VC9-x86.zip
+set php54_src=http://windows.php.net/downloads/releases/archives/%php54_ver%-nts-Win32-VC9-x86.zip
 set zip_src=https://github.com/npocmaka/batch.scripts/raw/master/hybrids/jscript/zipjs.bat
 
 set vc14_local=third_party\VC14_redist\vcredist_x86.exe
