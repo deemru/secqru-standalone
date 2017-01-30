@@ -8,9 +8,9 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.10.2
-set php71_ver=php-7.1.0
-set php70_ver=php-7.0.14
-set php56_ver=php-5.6.29
+set php71_ver=php-7.1.1
+set php70_ver=php-7.0.15
+set php56_ver=php-5.6.30
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
@@ -157,7 +157,7 @@ if not exist support\%prolog%-php-cgi-spawner.exe (
     set echostep=Installing php-cgi-spawner
     call :echostep
     if not exist support mkdir support || goto :error
-    %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.0.20/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe || goto :error
+    %dlfl% https://github.com/deemru/php-cgi-spawner/releases/download/1.1.23/php-cgi-spawner.exe support\%prolog%-php-cgi-spawner.exe || goto :error
 )
 
 if not exist %prolog%-start.bat (

@@ -21,6 +21,7 @@
 - php54: [VC9](https://github.com/deemru/secqru-standalone/tree/master/third_party/VC9_redist)
 - php56: [VC11](https://github.com/deemru/secqru-standalone/tree/master/third_party/VC11_redist)
 - php70: [VC14](https://github.com/deemru/secqru-standalone/tree/master/third_party/VC14_redist)
+- php71: [VC14](https://github.com/deemru/secqru-standalone/tree/master/third_party/VC14_redist)
 
 # Notice
 
