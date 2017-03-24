@@ -8,8 +8,8 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.10.3
-set php71_ver=php-7.1.2
-set php70_ver=php-7.0.16
+set php71_ver=php-7.1.3
+set php70_ver=php-7.0.17
 set php56_ver=php-5.6.30
 set php54_ver=php-5.4.45
 
