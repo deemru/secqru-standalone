@@ -48,5 +48,5 @@ deploy:
 - provider: GitHub
   auth_token:
     secure: k0qBvpcte6PgNm7deT1NJoObWi/apGm51D1Ll3mlkSZUNcSjO2F0PCuq2cgi5XSu
-  artifact: secqru-standalone-php54.zip secqru-standalone-php56.zip secqru-standalone-php70.zip secqru-standalone-php71.zip
+  artifact: secqru-standalone-php54.zip, secqru-standalone-php56.zip, secqru-standalone-php70.zip, secqru-standalone-php71.zip
   draft: true
