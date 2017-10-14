@@ -122,6 +122,7 @@ if not exist php/%prolog%-php-cgi.exe (
     (echo extension = ext\php_mbstring.dll) >> %prolog%-php.conf
     (echo extension = ext\php_gd2.dll) >> %prolog%-php.conf
     (echo extension = ext\php_curl.dll) >> %prolog%-php.conf
+    (echo extension = ext\php_gmp.dll) >> %prolog%-php.conf
     (echo zend_extension = ext\php_opcache.dll) >> %prolog%-php.conf
     (echo user_ini.filename = "") >> %prolog%-php.conf
 
