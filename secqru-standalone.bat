@@ -8,8 +8,8 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.12.1
-set php71_ver=php-7.1.8
-set php70_ver=php-7.0.22
+set php72_ver=php-7.2.0RC4
+set php71_ver=php-7.1.10
 set php56_ver=php-5.6.31
 set php54_ver=php-5.4.45
 
@@ -22,8 +22,8 @@ if not exist %dlfl% (
 )
 
 set nginx_src=http://nginx.org/download/%nginx_ver%.zip
+set php72_src=http://windows.php.net/downloads/qa/%php72_ver%-nts-Win32-VC15-x86.zip
 set php71_src=http://windows.php.net/downloads/releases/%php71_ver%-nts-Win32-VC14-x86.zip
-set php70_src=http://windows.php.net/downloads/releases/%php70_ver%-nts-Win32-VC14-x86.zip
 set php56_src=http://windows.php.net/downloads/releases/%php56_ver%-nts-Win32-VC11-x86.zip
 set php54_src=http://windows.php.net/downloads/releases/archives/%php54_ver%-nts-Win32-VC9-x86.zip
 set zip_src=https://github.com/npocmaka/batch.scripts/raw/master/hybrids/jscript/zipjs.bat
@@ -58,19 +58,19 @@ if not "%1"=="" if "%1"=="php56" (
     set vc_check=msvcr110.dll
 )
 
-if not "%1"=="" if "%1"=="php70" (
+if not "%1"=="" if "%1"=="php71" (
     set is_php_default=0
-    set php_ver=%php70_ver%
-    set php_src=%php70_src%
+    set php_ver=%php71_ver%
+    set php_src=%php71_src%
     set vc_local=%vc14_local%
     set vc_src=%vc14_src%
     set vc_check=vcruntime140.dll
 )
 
-if not "%1"=="" if "%1"=="php71" (
+if not "%1"=="" if "%1"=="php72" (
     set is_php_default=0
-    set php_ver=%php71_ver%
-    set php_src=%php71_src%
+    set php_ver=%php72_ver%
+    set php_src=%php72_src%
     set vc_local=%vc14_local%
     set vc_src=%vc14_src%
     set vc_check=vcruntime140.dll
