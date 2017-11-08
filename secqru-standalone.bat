@@ -7,10 +7,10 @@ set php_threads=4
 
 set prolog=secqru
 
-set nginx_ver=nginx-1.12.1
-set php72_ver=php-7.2.0RC4
-set php71_ver=php-7.1.10
-set php56_ver=php-5.6.31
+set nginx_ver=nginx-1.12.2
+set php72_ver=php-7.2.0RC6
+set php71_ver=php-7.1.11
+set php56_ver=php-5.6.32
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
