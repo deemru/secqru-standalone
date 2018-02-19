@@ -8,9 +8,9 @@ set php_threads=4
 set prolog=secqru
 
 set nginx_ver=nginx-1.12.2
-set php72_ver=php-7.2.0RC6
-set php71_ver=php-7.1.11
-set php56_ver=php-5.6.32
+set php72_ver=php-7.2.2
+set php71_ver=php-7.1.14
+set php56_ver=php-5.6.33
 set php54_ver=php-5.4.45
 
 set dlfl=third_party\dlfl\dlfl.exe
@@ -22,7 +22,7 @@ if not exist %dlfl% (
 )
 
 set nginx_src=http://nginx.org/download/%nginx_ver%.zip
-set php72_src=http://windows.php.net/downloads/qa/%php72_ver%-nts-Win32-VC15-x86.zip
+set php72_src=http://windows.php.net/downloads/releases/%php72_ver%-nts-Win32-VC15-x86.zip
 set php71_src=http://windows.php.net/downloads/releases/%php71_ver%-nts-Win32-VC14-x86.zip
 set php56_src=http://windows.php.net/downloads/releases/%php56_ver%-nts-Win32-VC11-x86.zip
 set php54_src=http://windows.php.net/downloads/releases/archives/%php54_ver%-nts-Win32-VC9-x86.zip
